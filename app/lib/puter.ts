@@ -350,7 +350,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      { model: 'google/gemma-2-27b-it', stream: true }
+      { model: 'claude-sonnet-4', stream: true }
     ) as Promise<AIResponse | undefined>;
   };
 
