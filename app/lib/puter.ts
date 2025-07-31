@@ -350,7 +350,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      { model: "mistral-7b-instruct" }
+      { model: "mistralai/Mistral-7B-Instruct-v0.3" }
     ) as Promise<AIResponse | undefined>;
   };
 
