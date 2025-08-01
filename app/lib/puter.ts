@@ -352,7 +352,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     ],
     {
       model: "claude-opus-4-latest",
-      testMode: true, // ✅ Enables test mode
+      // ✅ Enables test mode
     }
   ) as Promise<AIResponse | undefined>;
 };
