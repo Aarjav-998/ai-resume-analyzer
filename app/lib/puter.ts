@@ -351,7 +351,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       },
     ],
     {
-      model: "google/gemma-2-27b-it",
+      model: "claude-opus-4-latest",
       testMode: true, // ✅ Enables test mode
     }
   ) as Promise<AIResponse | undefined>;
