@@ -352,7 +352,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
         },
       ],
       {
-        model: "gpt-4o-mini ", // ✅ Claude Sonnet 3
+        model: "openai/gpt-4", // ✅ Claude Sonnet 3
                           // ✅ Optional test mode
         temperature: 0.7,                  // ✅ Adds randomness
         max_tokens: 100,                   // ✅ Response length cap
