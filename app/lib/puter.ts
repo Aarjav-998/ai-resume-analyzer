@@ -334,28 +334,42 @@ export const usePuterStore = create<PuterStore>((set, get) => {
     return;
   }
 
-  return puter.ai.chat(
-    [
+  try {
+    return await puter.ai.chat(
+      [
+        {
+          role: "user",
+          content: [
+            {
+              type: "file",
+              puter_path: path,
+            },
+            {
+              type: "text",
+              text: message,
+            },
+          ],
+        },
+      ],
       {
-        role: "user",
-        content: [
-          {
-            type: "file",
-            puter_path: path,
-          },
-          {
-            type: "text",
-            text: message,
-          },
-        ],
-      },
-    ],
-    {
-      model: "claude-opus-4-latest",
-      // ✅ Enables test mode
+        model: "claude-3-sonnet-20240229", // ✅ Claude Sonnet 3
+        testMode: true,                    // ✅ Optional test mode
+        temperature: 0.7,                  // ✅ Adds randomness
+        max_tokens: 100,                   // ✅ Response length cap
+                             // ✅ Enable streaming
+      }
+    ) as Promise<AIResponse | undefined>;
+  } catch (error: any) {
+    console.error("Chat failed:", error);
+    if (error?.error?.message?.includes("Permission denied")) {
+      setError("This delegate does not support testMode or the selected model.");
+    } else {
+      setError("An unexpected error occurred.");
     }
-  ) as Promise<AIResponse | undefined>;
+    return;
+  }
 };
+
 
 
   const img2txt = async (image: string | File | Blob, testMode?: boolean) => {
