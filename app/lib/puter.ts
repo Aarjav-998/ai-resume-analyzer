@@ -352,12 +352,24 @@ export const usePuterStore = create<PuterStore>((set, get) => {
         },
       ],
       {
-        model: "claude-3-sonnet-20240229", // ✅ Claude Sonnet 3
-        testMode: true,                    // ✅ Optional test mode
+        model: "gpt-4o-mini ", // ✅ Claude Sonnet 3
+                          // ✅ Optional test mode
         temperature: 0.7,                  // ✅ Adds randomness
         max_tokens: 100,                   // ✅ Response length cap
-                             // ✅ Enable streaming
+        stream: true,                      // ✅ Enable streaming
       }
+    ) as Promise<AIResponse | undefined>;
+  } catch (error: any) {
+    console.error("Chat failed:", error);
+    if (error?.error?.message?.includes("Permission denied")) {
+      setError("This delegate does not support testMode or the selected model.");
+    } else {
+      setError("An unexpected error occurred.");
+    }
+    return;
+  }
+};
+
     ) as Promise<AIResponse | undefined>;
   } catch (error: any) {
     console.error("Chat failed:", error);
